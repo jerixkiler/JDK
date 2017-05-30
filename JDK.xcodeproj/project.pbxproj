@@ -14,8 +14,8 @@
 		10FD9CCD1EDD4F210038AE29 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 10FD9CCB1EDD4F210038AE29 /* LaunchScreen.storyboard */; };
 		10FD9CD81EDD4F210038AE29 /* JDKTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10FD9CD71EDD4F210038AE29 /* JDKTests.swift */; };
 		10FD9CE31EDD4F210038AE29 /* JDKUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10FD9CE21EDD4F210038AE29 /* JDKUITests.swift */; };
-		10FD9CF11EDD506F0038AE29 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 10FD9CF01EDD506F0038AE29 /* GoogleService-Info.plist */; };
 		10FD9CF61EDD52E50038AE29 /* uiTextFieldExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10FD9CF51EDD52E50038AE29 /* uiTextFieldExtension.swift */; };
+		10FD9CF81EDD5CFD0038AE29 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 10FD9CF71EDD5CFD0038AE29 /* GoogleService-Info.plist */; };
 		2D33966D65FD96D07486714F /* Pods_JDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2162E9C73D7F0E7B836F7697 /* Pods_JDK.framework */; };
 		7E7C303A4D26D3E96B2195BF /* Pods_JDKTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A4A3074B554C8BFF4CDDF832 /* Pods_JDKTests.framework */; };
 		FE24A92165A5A331D857A8ED /* Pods_JDKUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B75F83F59D80137560E353B /* Pods_JDKUITests.framework */; };
@@ -52,8 +52,8 @@
 		10FD9CDE1EDD4F210038AE29 /* JDKUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = JDKUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		10FD9CE21EDD4F210038AE29 /* JDKUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JDKUITests.swift; sourceTree = "<group>"; };
 		10FD9CE41EDD4F210038AE29 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		10FD9CF01EDD506F0038AE29 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		10FD9CF51EDD52E50038AE29 /* uiTextFieldExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = uiTextFieldExtension.swift; sourceTree = "<group>"; };
+		10FD9CF71EDD5CFD0038AE29 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		18B0D33C6132C26155B7922D /* Pods-JDKTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-JDKTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-JDKTests/Pods-JDKTests.release.xcconfig"; sourceTree = "<group>"; };
 		2162E9C73D7F0E7B836F7697 /* Pods_JDK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_JDK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		2DF80D2C83CC43B816AA00B2 /* Pods-JDK.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-JDK.release.xcconfig"; path = "Pods/Target Support Files/Pods-JDK/Pods-JDK.release.xcconfig"; sourceTree = "<group>"; };
@@ -124,7 +124,7 @@
 				10FD9CC91EDD4F210038AE29 /* Assets.xcassets */,
 				10FD9CCB1EDD4F210038AE29 /* LaunchScreen.storyboard */,
 				10FD9CCE1EDD4F210038AE29 /* Info.plist */,
-				10FD9CF01EDD506F0038AE29 /* GoogleService-Info.plist */,
+				10FD9CF71EDD5CFD0038AE29 /* GoogleService-Info.plist */,
 			);
 			path = JDK;
 			sourceTree = "<group>";
@@ -313,8 +313,8 @@
 			files = (
 				10FD9CCD1EDD4F210038AE29 /* LaunchScreen.storyboard in Resources */,
 				10FD9CCA1EDD4F210038AE29 /* Assets.xcassets in Resources */,
+				10FD9CF81EDD5CFD0038AE29 /* GoogleService-Info.plist in Resources */,
 				10FD9CC81EDD4F210038AE29 /* Main.storyboard in Resources */,
-				10FD9CF11EDD506F0038AE29 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
