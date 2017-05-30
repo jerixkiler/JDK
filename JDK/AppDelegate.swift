@@ -7,6 +7,9 @@
 //
 
 import UIKit
+import GoogleSignIn
+import Firebase
+import FBSDKLoginKit
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -14,8 +17,27 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
 
 
+    func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any] = [:]) -> Bool {
+        let googleHandler = GIDSignIn.sharedInstance().handle(url,
+                                                              sourceApplication: options[UIApplicationOpenURLOptionsKey.sourceApplication] as!String,
+                                                              annotation: options[UIApplicationOpenURLOptionsKey.annotation])
+        
+        let facebookHandler = FBSDKApplicationDelegate.sharedInstance().application(app, open: url, sourceApplication: options[UIApplicationOpenURLOptionsKey.sourceApplication] as? String, annotation: options[UIApplicationOpenURLOptionsKey.annotation])
+        
+        return facebookHandler || googleHandler
+    }
+    
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-        // Override point for customization after application launch.
+        //configure firbase
+        FirebaseApp.configure()
+        //configure google signin
+        GIDSignIn.sharedInstance().clientID = FirebaseApp.app()?.options.clientID
+        //configure facebook login
+        FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
+        
+        
+        
+        
         return true
     }
 

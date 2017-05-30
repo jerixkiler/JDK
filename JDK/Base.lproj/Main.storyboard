@@ -1,14 +1,18 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11134" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="16D30" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11106"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
         <!--View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="JDK" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
@@ -16,11 +20,129 @@
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VTu-g6-h7W">
+                                <rect key="frame" x="256" y="617" width="103" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Google Sign-in"/>
+                                <connections>
+                                    <action selector="toogleGoogleSignIn:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Zwk-1w-PAC"/>
+                                </connections>
+                            </button>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="UXe-Vl-MKY">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="566"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                        </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="32.799999999999997" y="38.23088455772114"/>
+        </scene>
+        <!--Tab Bar Controller-->
+        <scene sceneID="jT0-sd-7od">
+            <objects>
+                <tabBarController id="FK5-QG-N1m" sceneMemberID="viewController">
+                    <tabBar key="tabBar" contentMode="scaleToFill" id="jU9-yL-zto">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="49"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    </tabBar>
+                    <connections>
+                        <segue destination="qam-nW-ghL" kind="relationship" relationship="viewControllers" id="uQw-0s-neF"/>
+                        <segue destination="fTw-ON-veM" kind="relationship" relationship="viewControllers" id="G8C-HC-DTF"/>
+                        <segue destination="TdH-HZ-wLx" kind="relationship" relationship="viewControllers" id="G0H-rb-iyz"/>
+                        <segue destination="4dk-EO-TVe" kind="relationship" relationship="viewControllers" id="0p7-5e-u9R"/>
+                        <segue destination="q1X-Mu-ntx" kind="relationship" relationship="viewControllers" id="uog-Zl-kvP"/>
+                    </connections>
+                </tabBarController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="MKe-Nk-dhr" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="767" y="38"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="got-XA-aRO">
+            <objects>
+                <navigationController id="qam-nW-ghL" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="" image="home" id="PLV-99-54G"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="Vw9-ky-jsq">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="3Vk-zr-HmT" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="766" y="-672"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="BiL-Be-Xav">
+            <objects>
+                <navigationController id="fTw-ON-veM" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="" image="eye" id="W8a-xe-HeQ"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="RkF-en-9xh">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="M85-pQ-RMg" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1590" y="-672"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="oaQ-mH-Vbo">
+            <objects>
+                <navigationController id="TdH-HZ-wLx" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="" image="groups" id="fG7-Re-3nY"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="WT6-kK-rNN">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="s2p-5v-WqS" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1590" y="37"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="le1-jo-3fP">
+            <objects>
+                <navigationController id="4dk-EO-TVe" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="" image="watchlist" id="Xgy-zU-2rx"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="hgA-Qm-IiD">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="xDn-7F-nIr" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="766" y="770"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="kbF-cY-FgY">
+            <objects>
+                <viewController id="q1X-Mu-ntx" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="cGd-oR-Rny"/>
+                        <viewControllerLayoutGuide type="bottom" id="svl-nu-006"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="SeI-gn-U2k">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="" image="user" id="tRI-Ub-eDB"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="UfK-Od-3pk" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1636" y="770"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="eye" width="29" height="17"/>
+        <image name="groups" width="29" height="20"/>
+        <image name="home" width="22" height="21"/>
+        <image name="user" width="20" height="20"/>
+        <image name="watchlist" width="34" height="12"/>
+    </resources>
 </document>

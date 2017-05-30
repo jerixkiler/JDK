@@ -14,6 +14,8 @@
 		10FD9CCD1EDD4F210038AE29 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 10FD9CCB1EDD4F210038AE29 /* LaunchScreen.storyboard */; };
 		10FD9CD81EDD4F210038AE29 /* JDKTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10FD9CD71EDD4F210038AE29 /* JDKTests.swift */; };
 		10FD9CE31EDD4F210038AE29 /* JDKUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10FD9CE21EDD4F210038AE29 /* JDKUITests.swift */; };
+		10FD9CF11EDD506F0038AE29 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 10FD9CF01EDD506F0038AE29 /* GoogleService-Info.plist */; };
+		10FD9CF61EDD52E50038AE29 /* uiTextFieldExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10FD9CF51EDD52E50038AE29 /* uiTextFieldExtension.swift */; };
 		2D33966D65FD96D07486714F /* Pods_JDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2162E9C73D7F0E7B836F7697 /* Pods_JDK.framework */; };
 		7E7C303A4D26D3E96B2195BF /* Pods_JDKTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A4A3074B554C8BFF4CDDF832 /* Pods_JDKTests.framework */; };
 		FE24A92165A5A331D857A8ED /* Pods_JDKUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B75F83F59D80137560E353B /* Pods_JDKUITests.framework */; };
@@ -50,6 +52,8 @@
 		10FD9CDE1EDD4F210038AE29 /* JDKUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = JDKUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		10FD9CE21EDD4F210038AE29 /* JDKUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JDKUITests.swift; sourceTree = "<group>"; };
 		10FD9CE41EDD4F210038AE29 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		10FD9CF01EDD506F0038AE29 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		10FD9CF51EDD52E50038AE29 /* uiTextFieldExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = uiTextFieldExtension.swift; sourceTree = "<group>"; };
 		18B0D33C6132C26155B7922D /* Pods-JDKTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-JDKTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-JDKTests/Pods-JDKTests.release.xcconfig"; sourceTree = "<group>"; };
 		2162E9C73D7F0E7B836F7697 /* Pods_JDK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_JDK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		2DF80D2C83CC43B816AA00B2 /* Pods-JDK.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-JDK.release.xcconfig"; path = "Pods/Target Support Files/Pods-JDK/Pods-JDK.release.xcconfig"; sourceTree = "<group>"; };
@@ -114,12 +118,13 @@
 		10FD9CC11EDD4F210038AE29 /* JDK */ = {
 			isa = PBXGroup;
 			children = (
+				10FD9CF21EDD52B60038AE29 /* Swift Files */,
 				10FD9CC21EDD4F210038AE29 /* AppDelegate.swift */,
-				10FD9CC41EDD4F210038AE29 /* ViewController.swift */,
 				10FD9CC61EDD4F210038AE29 /* Main.storyboard */,
 				10FD9CC91EDD4F210038AE29 /* Assets.xcassets */,
 				10FD9CCB1EDD4F210038AE29 /* LaunchScreen.storyboard */,
 				10FD9CCE1EDD4F210038AE29 /* Info.plist */,
+				10FD9CF01EDD506F0038AE29 /* GoogleService-Info.plist */,
 			);
 			path = JDK;
 			sourceTree = "<group>";
@@ -140,6 +145,31 @@
 				10FD9CE41EDD4F210038AE29 /* Info.plist */,
 			);
 			path = JDKUITests;
+			sourceTree = "<group>";
+		};
+		10FD9CF21EDD52B60038AE29 /* Swift Files */ = {
+			isa = PBXGroup;
+			children = (
+				10FD9CF41EDD52D30038AE29 /* Controller Swift Files */,
+				10FD9CF31EDD52C10038AE29 /* Extensions Swift Files */,
+			);
+			name = "Swift Files";
+			sourceTree = "<group>";
+		};
+		10FD9CF31EDD52C10038AE29 /* Extensions Swift Files */ = {
+			isa = PBXGroup;
+			children = (
+				10FD9CF51EDD52E50038AE29 /* uiTextFieldExtension.swift */,
+			);
+			name = "Extensions Swift Files";
+			sourceTree = "<group>";
+		};
+		10FD9CF41EDD52D30038AE29 /* Controller Swift Files */ = {
+			isa = PBXGroup;
+			children = (
+				10FD9CC41EDD4F210038AE29 /* ViewController.swift */,
+			);
+			name = "Controller Swift Files";
 			sourceTree = "<group>";
 		};
 		2DDD3AD01BF0F6CA4DEE9B87 /* Pods */ = {
@@ -284,6 +314,7 @@
 				10FD9CCD1EDD4F210038AE29 /* LaunchScreen.storyboard in Resources */,
 				10FD9CCA1EDD4F210038AE29 /* Assets.xcassets in Resources */,
 				10FD9CC81EDD4F210038AE29 /* Main.storyboard in Resources */,
+				10FD9CF11EDD506F0038AE29 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -446,6 +477,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				10FD9CF61EDD52E50038AE29 /* uiTextFieldExtension.swift in Sources */,
 				10FD9CC51EDD4F210038AE29 /* ViewController.swift in Sources */,
 				10FD9CC31EDD4F210038AE29 /* AppDelegate.swift in Sources */,
 			);
@@ -602,6 +634,7 @@
 			baseConfigurationReference = EAC553046E4BABC058A60637 /* Pods-JDK.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = JDK/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = Nexusbond.JDK;
@@ -615,6 +648,7 @@
 			baseConfigurationReference = 2DF80D2C83CC43B816AA00B2 /* Pods-JDK.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = JDK/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = Nexusbond.JDK;
@@ -700,6 +734,7 @@
 				10FD9CE91EDD4F210038AE29 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		10FD9CEA1EDD4F210038AE29 /* Build configuration list for PBXNativeTarget "JDKTests" */ = {
 			isa = XCConfigurationList;
@@ -708,6 +743,7 @@
 				10FD9CEC1EDD4F210038AE29 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		10FD9CED1EDD4F210038AE29 /* Build configuration list for PBXNativeTarget "JDKUITests" */ = {
 			isa = XCConfigurationList;
@@ -716,6 +752,7 @@
 				10FD9CEF1EDD4F210038AE29 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
