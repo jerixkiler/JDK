@@ -10,7 +10,14 @@ import UIKit
 
 class customCell: UICollectionViewCell {
     
-    @IBOutlet weak var myImage: UIImageView!
+    
+    @IBOutlet weak var countLabel: UILabel!
+    
+    @IBOutlet weak var topicDescriptionLabel: UILabel!
+    
+    @IBOutlet weak var backgroundImageView: UIImageView!
+    
+    @IBOutlet weak var joinButton: UIButton!
     
     
 }

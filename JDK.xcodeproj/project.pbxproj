@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		107AE63C1EDEB6B4009FF88E /* AddTopicViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 107AE6391EDEB6B4009FF88E /* AddTopicViewController.swift */; };
+		107AE63D1EDEB6B4009FF88E /* Topic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 107AE63A1EDEB6B4009FF88E /* Topic.swift */; };
+		107AE63E1EDEB6B4009FF88E /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 107AE63B1EDEB6B4009FF88E /* User.swift */; };
 		10D62AEB1EDE98FE00883B93 /* customCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10D62AEA1EDE98FE00883B93 /* customCell.swift */; };
 		10D62AED1EDE996100883B93 /* topicController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10D62AEC1EDE996100883B93 /* topicController.swift */; };
 		10FD9CC31EDD4F210038AE29 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10FD9CC21EDD4F210038AE29 /* AppDelegate.swift */; };
@@ -41,6 +44,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		107AE6391EDEB6B4009FF88E /* AddTopicViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddTopicViewController.swift; sourceTree = "<group>"; };
+		107AE63A1EDEB6B4009FF88E /* Topic.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Topic.swift; sourceTree = "<group>"; };
+		107AE63B1EDEB6B4009FF88E /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		10D62AEA1EDE98FE00883B93 /* customCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = customCell.swift; sourceTree = "<group>"; };
 		10D62AEC1EDE996100883B93 /* topicController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = topicController.swift; sourceTree = "<group>"; };
 		10FD9CBF1EDD4F210038AE29 /* JDK.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = JDK.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -122,7 +128,7 @@
 		10FD9CC11EDD4F210038AE29 /* JDK */ = {
 			isa = PBXGroup;
 			children = (
-				10FD9CF21EDD52B60038AE29 /* Swift Files */,
+				10FD9CF21EDD52B60038AE29 /* Topic.swift */,
 				10FD9CC21EDD4F210038AE29 /* AppDelegate.swift */,
 				10FD9CC61EDD4F210038AE29 /* Main.storyboard */,
 				10FD9CC91EDD4F210038AE29 /* Assets.xcassets */,
@@ -151,13 +157,13 @@
 			path = JDKUITests;
 			sourceTree = "<group>";
 		};
-		10FD9CF21EDD52B60038AE29 /* Swift Files */ = {
+		10FD9CF21EDD52B60038AE29 /* Topic.swift */ = {
 			isa = PBXGroup;
 			children = (
 				10FD9CF41EDD52D30038AE29 /* Controller Swift Files */,
 				10FD9CF31EDD52C10038AE29 /* Extensions Swift Files */,
 			);
-			name = "Swift Files";
+			name = Topic.swift;
 			sourceTree = "<group>";
 		};
 		10FD9CF31EDD52C10038AE29 /* Extensions Swift Files */ = {
@@ -171,6 +177,9 @@
 		10FD9CF41EDD52D30038AE29 /* Controller Swift Files */ = {
 			isa = PBXGroup;
 			children = (
+				107AE6391EDEB6B4009FF88E /* AddTopicViewController.swift */,
+				107AE63A1EDEB6B4009FF88E /* Topic.swift */,
+				107AE63B1EDEB6B4009FF88E /* User.swift */,
 				10FD9CC41EDD4F210038AE29 /* ViewController.swift */,
 				10D62AEA1EDE98FE00883B93 /* customCell.swift */,
 				10D62AEC1EDE996100883B93 /* topicController.swift */,
@@ -485,9 +494,12 @@
 			files = (
 				10D62AED1EDE996100883B93 /* topicController.swift in Sources */,
 				10FD9CF61EDD52E50038AE29 /* uiTextFieldExtension.swift in Sources */,
+				107AE63C1EDEB6B4009FF88E /* AddTopicViewController.swift in Sources */,
 				10FD9CC51EDD4F210038AE29 /* ViewController.swift in Sources */,
+				107AE63E1EDEB6B4009FF88E /* User.swift in Sources */,
 				10D62AEB1EDE98FE00883B93 /* customCell.swift in Sources */,
 				10FD9CC31EDD4F210038AE29 /* AppDelegate.swift in Sources */,
+				107AE63D1EDEB6B4009FF88E /* Topic.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

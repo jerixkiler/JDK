@@ -12,7 +12,7 @@ import QuartzCore
 import Firebase
 import FBSDKLoginKit
 
-class ViewController: UIViewController, UITextFieldDelegate {
+class ViewController: UIViewController, UITextFieldDelegate , GIDSignInDelegate , GIDSignInUIDelegate {
 
     
     
@@ -24,6 +24,10 @@ class ViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var btnFacebook: UIButton!
     @IBOutlet weak var btmConstraint: NSLayoutConstraint!
     @IBOutlet weak var viewForInput: UIView!
+    
+    var userUID: String?
+    
+    var databaseRef: DatabaseReference!
 
     
     let border = CALayer()
@@ -38,6 +42,11 @@ class ViewController: UIViewController, UITextFieldDelegate {
         setupLogin()
         txtPassword.delegate = self
         txtUsername.delegate = self
+        
+        databaseRef = Database.database().reference()
+        
+        GIDSignIn.sharedInstance().uiDelegate = self
+        GIDSignIn.sharedInstance().delegate = self
         
     }
     
@@ -84,6 +93,27 @@ class ViewController: UIViewController, UITextFieldDelegate {
         }
         
     }
+    
+    func sign(_ signIn: GIDSignIn!, didSignInFor user: GIDGoogleUser!, withError error: Error!) {
+        print("User Sign in to Google")
+        guard let authentication = user.authentication else { return }
+        let credential = GoogleAuthProvider.credential(withIDToken: authentication.idToken,
+                                                       accessToken: authentication.accessToken)
+        Auth.auth().signIn(with: credential) { (user1, error) in
+            self.userUID = user1?.uid
+            print("User Sign in to Firebase")
+            self.databaseRef.child("Users").child((user1?.uid)!).observeSingleEvent(of: .value, with: { (snapshot) in
+                let snapshot = snapshot.value as? NSDictionary
+                if snapshot == nil {
+                    let userDictionary = ["mFullName": (user1?.displayName)! ,"mEmail" : (user1?.email)! , "mPhotoUrl" : (user1?.photoURL?.absoluteString)!] as [String : Any]
+                    self.databaseRef.child("Users").child((user1?.uid)!).setValue(userDictionary)
+                }
+                self.performSegue(withIdentifier: "goToMainPage", sender: nil)
+            })
+        }
+    }
+    
+   
     
     @IBAction func toogleSegment(_ sender: Any) {
         switch segmentControll.selectedSegmentIndex{
@@ -156,6 +186,17 @@ class ViewController: UIViewController, UITextFieldDelegate {
     @IBAction func toogleGoogleSignIn(_ sender: Any) {
         GIDSignIn.sharedInstance().signIn()
     }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "goToMainPage" {
+            print("Go To Main Page")
+            let tabBarController = segue.destination as? UITabBarController
+            let nav = tabBarController?.viewControllers?[0] as! UINavigationController
+            let tc = nav.topViewController as! topicController
+            tc.userUID = userUID
+        }
+    }
+    
 
 }
 
