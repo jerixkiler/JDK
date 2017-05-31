@@ -99,7 +99,8 @@ class AddTopicViewController: UIViewController , UINavigationControllerDelegate 
                 print("Upload complete! Heres some metadata!! \(String(describing: metadata))")
                 print("Here's your download url \(downloadUrl!)")
                 self.updateTopicRoot()
-                self.performSegue(withIdentifier: "unwindSegueAddTopic", sender: nil)
+                self.navigationController?.popViewController(animated: true)
+                //self.performSegue(withIdentifier: "unwindSegueAddTopic", sender: nil)
                 //self.updateTopicDictionary(topicDictionary: &self.topicDictionary)
                 //                let userImagesDictionary = ["user_image_url" : "\(downloadUrl!)","about_me_display": aboutDisplay , "gender": userGender , "phone" : phone , "username" : username , "location": location]
                 //                self.updateProfile(userDictionary: userImagesDictionary as! [String : String], uid: uid)
@@ -117,12 +118,12 @@ class AddTopicViewController: UIViewController , UINavigationControllerDelegate 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
-        guard let button = sender as? UIButton, button === postButton else {
-            os_log("The post button was not pressed, cancelling", log: OSLog.default, type: .debug)
-            return
-        }
-        let desc = descriptionTextField.text
-        let photoUrl = imageDataUrl!
-        topic = Topic(ownerUserID: userUID!, photoBackgroundUrl: photoUrl, timeCreated: time_created!, topicDescription: desc!)
+//        guard let button = sender as? UIButton, button === postButton else {
+//            os_log("The post button was not pressed, cancelling", log: OSLog.default, type: .debug)
+//            return
+//        }
+//        let desc = descriptionTextField.text
+//        let photoUrl = imageDataUrl!
+//        topic = Topic(ownerUserID: userUID!, photoBackgroundUrl: photoUrl, timeCreated: time_created!, topicDescription: desc!)
     }
 }
