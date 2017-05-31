@@ -377,7 +377,9 @@
                             <constraint firstItem="ehN-Wf-uui" firstAttribute="top" secondItem="zL7-fa-Mzc" secondAttribute="bottom" id="zjU-Xv-Kgt"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="hd5-WZ-anb"/>
+                    <navigationItem key="navigationItem" id="hd5-WZ-anb">
+                        <barButtonItem key="rightBarButtonItem" systemItem="compose" id="zjq-Fi-CgY"/>
+                    </navigationItem>
                     <connections>
                         <outlet property="collectionView" destination="zL7-fa-Mzc" id="AR8-2K-raQ"/>
                     </connections>
