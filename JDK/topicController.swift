@@ -48,6 +48,11 @@ class topicController: UIViewController, UICollectionViewDelegate, UICollectionV
         DispatchQueue.main.async {
             cell.topicDescriptionLabel.text = topic.topicDescription
             cell.backgroundImageView.sd_setImage(with: URL(string: topic.photoBackgroundUrl!))
+            if self.userUID == topic.ownerUserID {
+                cell.joinButton.isHidden = true
+            } else {
+                cell.joinButton.isHidden = false
+            }
         }
         // cell.ratingControl.rating = meal.rating!
         return cell
