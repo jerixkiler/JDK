@@ -17,6 +17,7 @@ pod ‘Firebase/Storage’
 pod 'FirebaseUI/Storage'
 pod 'SDWebImage/Core’
 pod 'Firebase/Database'
+pod 'JSQMessagesViewController'
 
   target 'JDKTests' do
     inherit! :search_paths
