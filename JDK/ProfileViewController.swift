@@ -22,6 +22,12 @@ class ProfileViewController: UIViewController {
         
     }
 
+    @IBAction func toogleGoTo(_ sender: Any) {
+        
+        performSegue(withIdentifier: "goToLogout", sender: nil)
+        
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -30,16 +36,16 @@ class ProfileViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         profileImage.layer.cornerRadius = profileImage.frame.size.width / 2
         profileImage.layer.borderWidth = 2
-        profileImage.layer.borderColor = UIColor.white.cgColor
+        profileImage.layer.borderColor = UIColor.darkGray.cgColor
         navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
         navigationController?.navigationBar.shadowImage = UIImage()
         navigationController?.navigationBar.isTranslucent = true
-//        navigationItem.title = "Jeric John Carillo"
-//        navigationController?.navigationBar.isTranslucent = false
-            navigationController?.navigationBar.barTintColor = UIColor.init(red: 129/255, green: 215/255, blue: 251/255, alpha: 1)
         navigationController?.navigationBar.titleTextAttributes = [NSFontAttributeName: UIColor.white.cgColor]
+        navigationController?.navigationItem.title = "Jeric John"
         
-//        navigationController?.navigationBar.barStyle = .default
+        
+        coverImage.layer.shadowOpacity = 1
+        coverImage.layer.shadowRadius = 6
         
     }
  

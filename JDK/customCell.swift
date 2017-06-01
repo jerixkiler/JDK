@@ -19,5 +19,16 @@ class customCell: UICollectionViewCell {
     
     @IBOutlet weak var joinButton: UIButton!
     
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        
+        self.makeItCircle()
+    }
+    
+    func makeItCircle() {
+        self.backgroundImageView.layer.masksToBounds = true
+        self.backgroundImageView.layer.cornerRadius  = CGFloat(roundf(Float(self.backgroundImageView.frame.size.width/2.0)))
+    }
+    
     
 }
