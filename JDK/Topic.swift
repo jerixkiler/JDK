@@ -10,17 +10,19 @@ import UIKit
 
 class Topic {
 
+    var topicID: String?
     var ownerUserID: String?
     var photoBackgroundUrl: String?
     var timeCreated: Double?
     var topicDescription: String?
     
     
-    init(ownerUserID: String , photoBackgroundUrl: String , timeCreated: Double, topicDescription: String) {
+    init(ownerUserID: String , photoBackgroundUrl: String , timeCreated: Double, topicDescription: String , topicID: String) {
         self.ownerUserID = ownerUserID
         self.photoBackgroundUrl = photoBackgroundUrl
         self.timeCreated = timeCreated
         self.topicDescription = topicDescription
+        self.topicID = topicID
     }
 
     

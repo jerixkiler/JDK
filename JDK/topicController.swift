@@ -11,7 +11,7 @@ import SDWebImage
 import Firebase
 
 class topicController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource {
-
+    
     
     
     @IBOutlet weak var collectionView: UICollectionView!
@@ -19,11 +19,13 @@ class topicController: UIViewController, UICollectionViewDelegate, UICollectionV
     
     var topics = [Topic]()
     
+    var uid: String = (Auth.auth().currentUser?.uid)!
+    
     var userUID: String?
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         
         collectionView.delegate = self
         collectionView.dataSource = self
@@ -34,13 +36,92 @@ class topicController: UIViewController, UICollectionViewDelegate, UICollectionV
         loadHomeFeed()
     }
     
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let topic = topics[indexPath.row]
+        if userUID != topic.ownerUserID {
+            promptToWaitForOwnerResponse(topicID: topic.topicID!)
+            let cell = collectionView.cellForItem(at: indexPath) as! customCell
+            if cell.joinButton.titleLabel?.text == "Join" {
+                cell.joinButton.setTitle("Pending", for: .normal)
+            }
+        } else {
+            print("Owner clicked!")
+        }
+    }
     
+    func promptToWaitForOwnerResponse(topicID: String){
+        
+        databaseRef.child("Topics").child(topicID).observeSingleEvent(of: .value, with: {(snapshot) in
+            if snapshot.hasChild("members") {
+                self.databaseRef.child("Topics").child(topicID).child("members").observeSingleEvent(of: .value, with: {(snapshot) in
+                    let value = snapshot.value as! NSDictionary
+                    if value[self.uid] as! Bool == false {
+                        let alertController = UIAlertController(title: "Waiting", message: "Response is being sent", preferredStyle: .alert)
+                        let okButton = UIAlertAction(title: "OK", style: .default, handler: nil)
+                        self.databaseRef.child("Topics").child(topicID).child("members").updateChildValues([(Auth.auth().currentUser?.uid)!:false])
+                        alertController.addAction(okButton)
+                        self.present(alertController, animated: true, completion: nil)
+                    } else {
+                        print("Accepted")
+                    }
+                })
+            } else {
+                let alertController = UIAlertController(title: "Response is sent", message: "Wait for response", preferredStyle: .alert)
+                let okButton = UIAlertAction(title: "OK", style: .default, handler: nil)
+                self.databaseRef.child("Topics").child(topicID).child("members").updateChildValues([(Auth.auth().currentUser?.uid)!:false])
+                alertController.addAction(okButton)
+                self.present(alertController, animated: true, completion: nil)
+            }
+            
+        })
+        
+        
+        
+        //        if isResponseAccepted(topicID: topicID) == false {
+        //            let alertController = UIAlertController(title: "Response Send", message: "Wait for the response", preferredStyle: .alert)
+        //            let okButton = UIAlertAction(title: "OK", style: .default, handler: nil)
+        //            databaseRef.child("Topics").child(topicID).child("members").updateChildValues([(Auth.auth().currentUser?.uid)!:false])
+        //            alertController.addAction(okButton)
+        //            present(alertController, animated: true, completion: nil)
+        //        } else {
+        //            print("Accepted")
+        //        }
+        
+        
+    }
     
-    
-    
+//    func isResponseAccepted(topicID: String) -> Bool {
+//        var isAccepted: Bool?
+//        databaseRef.child("Topics").child(topicID).child("members").observeSingleEvent(of: .value, with: {(snapshot) in
+//            let value = snapshot.value as! NSDictionary
+//            if value[self.uid] as! Bool == false {
+//                isAccepted = false
+//            } else {
+//                isAccepted = true
+//            }
+//        })
+//        return isAccepted!
+//    }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return topics.count
+    }
+    
+    func isResponsePending(topicID: String) -> Bool {
+        
+        //        databaseRef.child("Topics").child(topicID).child("members").observeSingleEvent(of: .value, with: {(snapshot) in
+        //
+        //            let value = snapshot.value as! NSDictionary
+        //
+        //            if value[uid] as! Bool == false {
+        //
+        //            } else {
+        //
+        //            }
+        //
+        //        })
+        
+        return false
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -58,16 +139,22 @@ class topicController: UIViewController, UICollectionViewDelegate, UICollectionV
             if self.userUID == topic.ownerUserID {
                 cell.joinButton.isHidden = true
             } else {
+                self.databaseRef.child("Topics").child(topic.topicID!).child("members").observeSingleEvent(of: .value, with: {(snapshot) in
+                    let value = snapshot.value as! NSDictionary
+                    if value[self.uid] as! Bool == false {
+                        cell.joinButton.setTitle("Pending", for: .normal)
+                    } else {
+                        cell.joinButton.setTitle("Connect", for: .normal)
+                    }
+                })
                 cell.joinButton.isHidden = false
             }
         }
         // cell.ratingControl.rating = meal.rating!
-        
         return cell
     }
-    
     func loadHomeFeed(){
-        
+        topics.removeAll()
         let topicRef: DatabaseReference = databaseRef.child("Topics")
         databaseRef.child("Topics").observeSingleEvent(of: .value, with: { (snapshot) in
             //let snapshot = snapshot.value as? NSDictionary
@@ -79,7 +166,7 @@ class topicController: UIViewController, UICollectionViewDelegate, UICollectionV
                     let photoBackgroundUrl = value?["photo_background_url"] as? String
                     let timeCreated = value?["time_created"] as? Double
                     let topicDescription = value?["topic_description"] as? String
-                    let newTopic = Topic(ownerUserID: userID!, photoBackgroundUrl: photoBackgroundUrl!, timeCreated: timeCreated!, topicDescription: topicDescription!)
+                    let newTopic = Topic(ownerUserID: userID!, photoBackgroundUrl: photoBackgroundUrl!, timeCreated: timeCreated!, topicDescription: topicDescription! , topicID: snap.key)
                     print("\(userID!)  \(photoBackgroundUrl!)  \(timeCreated!)  \(topicDescription!)")
                     self.topics.append(newTopic)
                     DispatchQueue.main.async {
@@ -89,12 +176,11 @@ class topicController: UIViewController, UICollectionViewDelegate, UICollectionV
             }
         })
     }
-
+    
     override func viewWillAppear(_ animated: Bool) {
-//        navigationController?.navigationBar.isTranslucent = false
+        //        navigationController?.navigationBar.isTranslucent = false
         navigationController?.navigationBar.barTintColor = UIColor.init(red: 129/255, green: 215/255, blue: 251/255, alpha: 1)
     }
-    
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -118,5 +204,5 @@ class topicController: UIViewController, UICollectionViewDelegate, UICollectionV
         }
     }
     
-
+    
 }

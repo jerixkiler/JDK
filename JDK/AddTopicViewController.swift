@@ -46,7 +46,7 @@ class AddTopicViewController: UIViewController , UINavigationControllerDelegate 
         uploadImagePartTwo(data: imageDataTemporary!)
         topicId = databaseRef.childByAutoId().key
         time_created = NSDate().timeIntervalSince1970
-        topicDictionary = ["topic_description" : descriptionTextField.text!,"owner_userID": userUID! , "time_created": time_created]
+        topicDictionary = ["topic_description" : descriptionTextField.text!,"owner_userID": userUID! , "time_created": time_created , "members":["sample":false]]
         databaseRef.child("Topics").child(topicId!).setValue(topicDictionary)
         print("Topic Added!")
         //      dismiss(animated: true, completion: nil)

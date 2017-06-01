@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		10148C511EE01C71008DC985 /* SeeMemberViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10148C501EE01C71008DC985 /* SeeMemberViewCell.swift */; };
 		107AE63C1EDEB6B4009FF88E /* AddTopicViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 107AE6391EDEB6B4009FF88E /* AddTopicViewController.swift */; };
 		107AE63D1EDEB6B4009FF88E /* Topic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 107AE63A1EDEB6B4009FF88E /* Topic.swift */; };
 		107AE63E1EDEB6B4009FF88E /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 107AE63B1EDEB6B4009FF88E /* User.swift */; };
@@ -46,6 +47,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		10148C501EE01C71008DC985 /* SeeMemberViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SeeMemberViewCell.swift; sourceTree = "<group>"; };
 		107AE6391EDEB6B4009FF88E /* AddTopicViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddTopicViewController.swift; sourceTree = "<group>"; };
 		107AE63A1EDEB6B4009FF88E /* Topic.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Topic.swift; sourceTree = "<group>"; };
 		107AE63B1EDEB6B4009FF88E /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
@@ -189,6 +191,7 @@
 				10D62AEC1EDE996100883B93 /* topicController.swift */,
 				10D62AF01EDEC85700883B93 /* ProfileViewController.swift */,
 				10D62AF21EDEDBB500883B93 /* ChatViewController.swift */,
+				10148C501EE01C71008DC985 /* SeeMemberViewCell.swift */,
 			);
 			name = "Controller Swift Files";
 			sourceTree = "<group>";
@@ -505,6 +508,7 @@
 				107AE63E1EDEB6B4009FF88E /* User.swift in Sources */,
 				10D62AEB1EDE98FE00883B93 /* customCell.swift in Sources */,
 				10D62AF11EDEC85700883B93 /* ProfileViewController.swift in Sources */,
+				10148C511EE01C71008DC985 /* SeeMemberViewCell.swift in Sources */,
 				10FD9CC31EDD4F210038AE29 /* AppDelegate.swift in Sources */,
 				10D62AF31EDEDBB500883B93 /* ChatViewController.swift in Sources */,
 				107AE63D1EDEB6B4009FF88E /* Topic.swift in Sources */,
