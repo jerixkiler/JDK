@@ -470,7 +470,7 @@
             <objects>
                 <navigationController id="URX-fF-p2g" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="" image="groups" id="xis-8C-7Hi"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="DZz-gY-bhR">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="DZz-gY-bhR">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -491,7 +491,7 @@
             <objects>
                 <navigationController id="fTw-ON-veM" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="" image="messaging" id="W8a-xe-HeQ"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="RkF-en-9xh">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="RkF-en-9xh">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -534,7 +534,7 @@
             <objects>
                 <navigationController id="TdH-HZ-wLx" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="" image="home" id="fG7-Re-3nY"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="WT6-kK-rNN">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="WT6-kK-rNN">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -548,7 +548,7 @@
             <objects>
                 <navigationController id="4dk-EO-TVe" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="" image="user" id="Xgy-zU-2rx"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="hgA-Qm-IiD">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="hgA-Qm-IiD">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -619,7 +619,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iZa-bp-bVw" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1924" y="814.54272863568224"/>
+            <point key="canvasLocation" x="1924" y="815"/>
         </scene>
     </scenes>
     <resources>
