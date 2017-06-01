@@ -13,6 +13,7 @@ import Firebase
 class topicController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource {
 
     
+    
     @IBOutlet weak var collectionView: UICollectionView!
     var databaseRef: DatabaseReference!
     
@@ -33,6 +34,11 @@ class topicController: UIViewController, UICollectionViewDelegate, UICollectionV
         loadHomeFeed()
     }
     
+    
+    
+    
+    
+    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return topics.count
     }
@@ -43,6 +49,7 @@ class topicController: UIViewController, UICollectionViewDelegate, UICollectionV
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellIdentifier, for: indexPath) as? customCell else {
             fatalError("The dequeued cell is not an instance of HomeFeedCell.")
         }
+        cell.backgroundImageView.layer.cornerRadius = cell.backgroundImageView.frame.size.width / 2
         // Fetches the appropriate meal for the data source layout.
         let topic = topics[indexPath.row]
         DispatchQueue.main.async {
@@ -55,6 +62,7 @@ class topicController: UIViewController, UICollectionViewDelegate, UICollectionV
             }
         }
         // cell.ratingControl.rating = meal.rating!
+        
         return cell
     }
     
@@ -82,6 +90,12 @@ class topicController: UIViewController, UICollectionViewDelegate, UICollectionV
         })
     }
 
+    override func viewWillAppear(_ animated: Bool) {
+//        navigationController?.navigationBar.isTranslucent = false
+        navigationController?.navigationBar.barTintColor = UIColor.init(red: 129/255, green: 215/255, blue: 251/255, alpha: 1)
+    }
+    
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
