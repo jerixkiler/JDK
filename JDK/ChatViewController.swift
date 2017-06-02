@@ -161,19 +161,9 @@ class ChatViewController:  JSQMessagesViewController{
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        
-        // Do any additional setup after loading the view.
-        
-        
-        
         self.senderId = Auth.auth().currentUser?.uid
         self.senderDisplayName = "Sample"
-        // No avatars
-        //        collectionView!.collectionViewLayout.incomingAvatarViewSize = CGSize.zero
-        //        collectionView!.collectionViewLayout.outgoingAvatarViewSize = CGSize.zero
         databaseRef = Database.database().reference()
-        
         print(senderId)
         observeMessages()
     }
@@ -183,15 +173,29 @@ class ChatViewController:  JSQMessagesViewController{
         // Dispose of any resources that can be recreated.
     }
     
+    @IBAction func seeMembers(_ sender: Any) {
+        self.performSegue(withIdentifier: "goToMembers", sender: topic)
+    }
+    
+    
+    @IBAction func backButton(_ sender: Any) {
+        dismiss(animated: true, completion: nil)
+    }
+    
+    
 
-    /*
+    
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
+        if segue.identifier == "goToMembers" {
+            let smtvc = segue.destination as! SeeMemberTableViewController
+            smtvc.topic = topic
+        }
     }
-    */
+    
 
 }

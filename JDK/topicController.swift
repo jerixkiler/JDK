@@ -54,77 +54,56 @@ class topicController: UIViewController, UICollectionViewDelegate, UICollectionV
     func promptToWaitForOwnerResponse(topicID: String , topicSender: Topic){
         
         databaseRef.child("Topics").child(topicID).observeSingleEvent(of: .value, with: {(snapshot) in
-            if snapshot.hasChild("members") {
-                self.databaseRef.child("Topics").child(topicID).child("members").observeSingleEvent(of: .value, with: {(snapshot) in
-                    let value = snapshot.value as! NSDictionary
-                    if value[self.uid] as! Bool == false {
+            //if snapshot.hasChild("members") {
+            self.databaseRef.child("Topics").child(topicID).child("members").observeSingleEvent(of: .value, with: {(snapshot) in
+                let value = snapshot.value as! NSDictionary
+                
+                if snapshot.hasChild(self.uid) , let memberValue = value[self.uid] as? NSDictionary {
+                    if memberValue["isJoined"] as! Bool == false {
                         let alertController = UIAlertController(title: "Waiting", message: "Response is being sent", preferredStyle: .alert)
                         let okButton = UIAlertAction(title: "OK", style: .default, handler: nil)
-//                        self.databaseRef.child("Topics").child(topicID).child("members").updateChildValues([(Auth.auth().currentUser?.uid)!:false])
+                        //                        self.databaseRef.child("Topics").child(topicID).child("members").updateChildValues([(Auth.auth().currentUser?.uid)!:false])
                         alertController.addAction(okButton)
                         self.present(alertController, animated: true, completion: nil)
                     } else {
+                        //                            cell.joinButton.setTitle("Connect", for: .normal)
                         print("Accepted")
                         self.performSegue(withIdentifier: "goToChat", sender: topicSender)
                     }
-                })
-            } else {
-                let alertController = UIAlertController(title: "Response is sent", message: "Wait for response", preferredStyle: .alert)
-                let okButton = UIAlertAction(title: "OK", style: .default, handler: nil)
-                self.databaseRef.child("Topics").child(topicID).child("members").updateChildValues([(Auth.auth().currentUser?.uid)!:false])
-                alertController.addAction(okButton)
-                self.present(alertController, animated: true, completion: nil)
-            }
+                } else {
+                    let alertController = UIAlertController(title: "Response is sent", message: "Wait for response", preferredStyle: .alert)
+                    let okButton = UIAlertAction(title: "OK", style: .default, handler: nil)
+                    self.databaseRef.child("Topics").child(topicID).child("members").updateChildValues([(Auth.auth().currentUser?.uid)!:["isJoined": false , "isActive":false,"isTyping":false]])
+                    alertController.addAction(okButton)
+                    self.present(alertController, animated: true, completion: nil)
+                }
+                
+                //                    if value[self.uid] as! Bool == false {
+                //                        let alertController = UIAlertController(title: "Waiting", message: "Response is being sent", preferredStyle: .alert)
+                //                        let okButton = UIAlertAction(title: "OK", style: .default, handler: nil)
+                ////                        self.databaseRef.child("Topics").child(topicID).child("members").updateChildValues([(Auth.auth().currentUser?.uid)!:false])
+                //                        alertController.addAction(okButton)
+                //                        self.present(alertController, animated: true, completion: nil)
+                //                    } else {
+                //                        print("Accepted")
+                //                        self.performSegue(withIdentifier: "goToChat", sender: topicSender)
+                //                    }
+            })
+            // } else {
+            
+            // }
             
         })
         
         
         
-        //        if isResponseAccepted(topicID: topicID) == false {
-        //            let alertController = UIAlertController(title: "Response Send", message: "Wait for the response", preferredStyle: .alert)
-        //            let okButton = UIAlertAction(title: "OK", style: .default, handler: nil)
-        //            databaseRef.child("Topics").child(topicID).child("members").updateChildValues([(Auth.auth().currentUser?.uid)!:false])
-        //            alertController.addAction(okButton)
-        //            present(alertController, animated: true, completion: nil)
-        //        } else {
-        //            print("Accepted")
-        //        }
         
         
     }
     
-//    func isResponseAccepted(topicID: String) -> Bool {
-//        var isAccepted: Bool?
-//        databaseRef.child("Topics").child(topicID).child("members").observeSingleEvent(of: .value, with: {(snapshot) in
-//            let value = snapshot.value as! NSDictionary
-//            if value[self.uid] as! Bool == false {
-//                isAccepted = false
-//            } else {
-//                isAccepted = true
-//            }
-//        })
-//        return isAccepted!
-//    }
-    
+    //
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return topics.count
-    }
-    
-    func isResponsePending(topicID: String) -> Bool {
-        
-        //        databaseRef.child("Topics").child(topicID).child("members").observeSingleEvent(of: .value, with: {(snapshot) in
-        //
-        //            let value = snapshot.value as! NSDictionary
-        //
-        //            if value[uid] as! Bool == false {
-        //
-        //            } else {
-        //
-        //            }
-        //
-        //        })
-        
-        return false
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -142,10 +121,12 @@ class topicController: UIViewController, UICollectionViewDelegate, UICollectionV
             } else {
                 self.databaseRef.child("Topics").child(topic.topicID!).child("members").observeSingleEvent(of: .value, with: {(snapshot) in
                     let value = snapshot.value as! NSDictionary
-                    if value[self.uid] as! Bool == false {
-                        cell.joinButton.setTitle("Pending", for: .normal)
-                    } else {
-                        cell.joinButton.setTitle("Connect", for: .normal)
+                    if snapshot.hasChild(self.uid) , let memberValue = value[self.uid] as? NSDictionary {
+                        if memberValue["isJoined"] as! Bool == false {
+                            cell.joinButton.setTitle("Pending", for: .normal)
+                        } else {
+                            cell.joinButton.setTitle("Connect", for: .normal)
+                        }
                     }
                 })
                 cell.joinButton.isHidden = false
@@ -186,11 +167,9 @@ class topicController: UIViewController, UICollectionViewDelegate, UICollectionV
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
     @IBAction func addPostAction(_ sender: Any) {
         performSegue(withIdentifier: "goToAddPost", sender: nil)
     }
-    
     // MARK: - Navigation
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -203,8 +182,8 @@ class topicController: UIViewController, UICollectionViewDelegate, UICollectionV
         } else if segue.identifier == "goToChat" {
             print("Go To Chat")
             if let topic = sender as? Topic {
-                //let nav = segue.destination as! UINavigationController
-                let chatVc = segue.destination as! ChatViewController
+                let nav = segue.destination as! UINavigationController
+                let chatVc = nav.viewControllers.first as! ChatViewController
                 chatVc.senderDisplayName = "Sample"
                 chatVc.topic = topic
                 chatVc.topicRef = topicRef.child(topic.topicID!)
