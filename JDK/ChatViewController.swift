@@ -58,8 +58,15 @@ class ChatViewController:  JSQMessagesViewController{
     // For avatar images function
     override func collectionView(_ collectionView: JSQMessagesCollectionView!, avatarImageDataForItemAt indexPath: IndexPath!) -> JSQMessageAvatarImageDataSource! {
         //return nil
-        let placeHolderImage = UIImage(named: "no_image")
+        
+        
+        
+        let placeHolderImage = UIImage(named:"no_image")
+//       let avatarImage = JSQMessagesAvatarImageFactory.avatarImage(withUserInitials: "DL", backgroundColor: UIColor.jsq_messageBubbleGreen(), textColor: UIColor.white, font: UIFont.systemFont(ofSize: 12), diameter: UInt(kJSQMessagesCollectionViewAvatarSizeDefault))
+        
         let avatarImage = JSQMessagesAvatarImage(avatarImage: nil, highlightedImage: nil, placeholderImage: placeHolderImage)
+
+        
         let message = messages[indexPath.item]
         
         if avatarImage?.avatarImage == nil {
@@ -84,6 +91,7 @@ class ChatViewController:  JSQMessagesViewController{
                             DispatchQueue.main.async{
                                 avatarImage!.avatarImage = image
                                 avatarImage!.avatarHighlightedImage = image
+                                
                             }
                         }
                         //avatarImage?.avatarImage = image
@@ -177,6 +185,7 @@ class ChatViewController:  JSQMessagesViewController{
     
     @IBAction func seeMembers(_ sender: Any) {
         self.performSegue(withIdentifier: "goToMembers", sender: topic)
+        
     }
     
     

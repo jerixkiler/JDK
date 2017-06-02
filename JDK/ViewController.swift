@@ -16,6 +16,7 @@ class ViewController: UIViewController, UITextFieldDelegate , GIDSignInDelegate 
 
     
     
+    @IBOutlet weak var actIndicator: UIActivityIndicatorView!
     @IBOutlet weak var segmentControll: UISegmentedControl!
     @IBOutlet weak var txtUsername: UITextField!
     @IBOutlet weak var txtPassword: UITextField!
@@ -47,6 +48,11 @@ class ViewController: UIViewController, UITextFieldDelegate , GIDSignInDelegate 
         
         GIDSignIn.sharedInstance().uiDelegate = self
         GIDSignIn.sharedInstance().delegate = self
+        
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        actIndicator.isHidden = true
         
     }
     
@@ -102,12 +108,19 @@ class ViewController: UIViewController, UITextFieldDelegate , GIDSignInDelegate 
         Auth.auth().signIn(with: credential) { (user1, error) in
             self.userUID = user1?.uid
             print("User Sign in to Firebase")
+            self.viewForInput.isHidden = true
+            self.actIndicator.isHidden = false
+            self.actIndicator.startAnimating()
+            
             self.databaseRef.child("Users").child((user1?.uid)!).observeSingleEvent(of: .value, with: { (snapshot) in
                 let snapshot = snapshot.value as? NSDictionary
                 if snapshot == nil {
                     let userDictionary = ["mFullName": (user1?.displayName)! ,"mEmail" : (user1?.email)! , "mPhotoUrl" : (user1?.photoURL?.absoluteString)!] as [String : Any]
                     self.databaseRef.child("Users").child((user1?.uid)!).setValue(userDictionary)
                 }
+                self.actIndicator.stopAnimating()
+                self.actIndicator.isHidden = true
+                self.viewForInput.isHidden = false
                 self.performSegue(withIdentifier: "goToMainPage", sender: nil)
             })
         }

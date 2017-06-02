@@ -33,6 +33,7 @@ class SeeMemberTableViewController: UITableViewController {
         
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
+        loadChatMembers()
     }
     
     func loadChatMembers(){
@@ -42,6 +43,7 @@ class SeeMemberTableViewController: UITableViewController {
             for snap in snapshot.children.allObjects as! [DataSnapshot]  {
                 // print(snap.key)
                 let userUID: String = snap.key
+                
                 if userUID != "sample" {
                     membersRef.child(userUID).observeSingleEvent(of:.value, with: { (snapshots) in
                         // Get user value
