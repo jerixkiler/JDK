@@ -23,6 +23,8 @@ class ChatViewController:  JSQMessagesViewController{
     
     var uid: String = (Auth.auth().currentUser?.uid)!
     
+    var isStarting: Bool = true
+    
     var topicRef: DatabaseReference!
     var databaseRef: DatabaseReference!
     var topic: Topic? {
@@ -76,13 +78,9 @@ class ChatViewController:  JSQMessagesViewController{
         //
         
         if let messageID = message.senderId {
-            
             databaseRef.child("Users").child(messageID).observe(.value, with: { (snapshot) in
-                
                 if let profileURL = (snapshot.value as AnyObject!)!["mPhotoUrl"] as! String! {
-                    
                     let profileNSURL: NSURL = NSURL(string: profileURL)!
-                    
                     let manager: SDWebImageManager = SDWebImageManager.shared()
                     manager.imageDownloader?.downloadImage(with: profileNSURL as URL, options: [], progress: nil, completed: {(image , error , cached , url) in
                         if image != nil {
@@ -146,27 +144,35 @@ class ChatViewController:  JSQMessagesViewController{
         finishSendingMessage() // 5
     }
     
+    
+    
     private func observeMessages() {
+        
         messageRef = topicRef!.child("messages")
         // 1.
         let messageQuery = messageRef.queryLimited(toLast:25)
-        
         // 2. We can use the observe method to listen for new
         // messages being written to the Firebase DB
         newMessageRefHandle = messageQuery.observe(.childAdded, with: { (snapshot) -> Void in
             // 3
             let messageData = snapshot.value as! Dictionary<String, String>
             
+            
             if let id = messageData["senderId"] as String!, let name = messageData["senderName"] as String!, let text = messageData["text"] as String!, text.characters.count > 0 {
                 // 4
                 self.addMessage(withId: id, name: name, text: text)
-                
                 // 5
                 self.finishReceivingMessage()
             } else {
                 print("Error! Could not decode message data")
             }
         })
+        
+        if self.isStarting != true {
+            JSQSystemSoundPlayer.jsq_playMessageSentSound()
+        }
+        self.isStarting = false
+        
     }
 
     override func viewDidLoad() {
