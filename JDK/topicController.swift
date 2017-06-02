@@ -68,6 +68,7 @@ class topicController: UIViewController, UICollectionViewDelegate, UICollectionV
                     } else {
                         //                            cell.joinButton.setTitle("Connect", for: .normal)
                         print("Accepted")
+                        self.databaseRef.child("Topics").child(topicID).child("members").child(self.uid).updateChildValues(["isActive":true])
                         self.performSegue(withIdentifier: "goToChat", sender: topicSender)
                     }
                 } else {

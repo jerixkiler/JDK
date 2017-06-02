@@ -37,7 +37,7 @@ class SeeMemberViewCell: UITableViewCell {
     @IBAction func clickStatusButton(_ sender: Any) {
         if btnStatus.titleLabel?.text == "Accept" {
             print(userUIDInCell!)
-            databaseRef.child("Topics").child(topicID).child("members").child(userUIDInCell).updateChildValues(["isJoined": true])
+            databaseRef.child("Topics").child(topicID!).child("members").child(userUIDInCell!).updateChildValues(["isJoined": true])
         }
     }
     

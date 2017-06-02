@@ -21,6 +21,8 @@ class ChatViewController:  JSQMessagesViewController{
     private lazy var messageRef: DatabaseReference = self.topicRef!.child("messages")
     private var newMessageRefHandle: DatabaseHandle?
     
+    var uid: String = (Auth.auth().currentUser?.uid)!
+    
     var topicRef: DatabaseReference!
     var databaseRef: DatabaseReference!
     var topic: Topic? {
@@ -179,6 +181,9 @@ class ChatViewController:  JSQMessagesViewController{
     
     
     @IBAction func backButton(_ sender: Any) {
+        if topic?.ownerUserID != uid {
+            databaseRef.child("Topics").child((topic?.topicID)!).child("members").child(uid).updateChildValues(["isActive":false])
+        }
         dismiss(animated: true, completion: nil)
     }
     
