@@ -37,6 +37,10 @@ class AddTopicViewController: UIViewController , UINavigationControllerDelegate 
         navigationItem.title = "Add Topic"
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
