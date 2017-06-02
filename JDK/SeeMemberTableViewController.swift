@@ -33,50 +33,104 @@ class SeeMemberTableViewController: UITableViewController {
         
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
-        loadChatMembers()
+//        loadChatMembers()
     }
     
     func loadChatMembers(){
-        databaseRef.child("Topics").child((topic?.topicID!)!).child("members").observe(.value, with: {(snapshot) in
+        databaseRef.child("Topics").child((topic?.topicID!)!).child("members").observeSingleEvent(of: .value, with: {(snapshot) in
             self.members.removeAll()
+            print("remove")
+            
             let membersRef: DatabaseReference = self.databaseRef.child("Topics").child((self.topic?.topicID!)!).child("members")
             for snap in snapshot.children.allObjects as! [DataSnapshot]  {
                 // print(snap.key)
-                let userUID: String = snap.key
-                
-                if userUID != "sample" {
-                    membersRef.child(userUID).observeSingleEvent(of:.value, with: { (snapshots) in
-                        // Get user value
-                        let value = snapshots.value as? NSDictionary
-                        let isActive = value?["isActive"] as? Bool
-                        let isJoined = value?["isJoined"] as? Bool
-                        var memberStatus: String?
-                        if isActive == true {
-                            memberStatus = "Active"
-                        } else if isJoined == true {
-                            memberStatus = "Joined"
-                        } else {
-                            memberStatus = "Pending"
-                        }
-                        self.databaseRef.child("Users").child(userUID).observeSingleEvent(of: .value, with: { (snapshot_user) in
-                            let userValue = snapshot_user.value as? NSDictionary
-                            let displayName = userValue?["mFullName"] as! String
-                            let photoUrl = userValue?["mPhotoUrl"] as! String
-                            print(displayName)
-                            print(photoUrl)
-                            print(memberStatus!)
-                            let chatMember = ChatMembers(memberImageUrl: photoUrl, memberDisplayName: displayName, memberStatus: memberStatus!,memberUID: userUID)
-                            self.members.append(chatMember)
-                            DispatchQueue.main.async {
-                                self.collectionViewMembers.reloadData()
+                if snap.childrenCount == 3 {
+                    print(snap.key)
+                    let userUID: String = snap.key
+                    
+                    if userUID != "sample" {
+                        membersRef.child(userUID).observeSingleEvent(of:.value, with: { (snapshots) in
+                            // Get user value
+                            let value = snapshots.value as? NSDictionary
+                            let isActive = value?["isActive"] as? Bool
+                            let isJoined = value?["isJoined"] as? Bool
+                            var memberStatus: String?
+                            if isActive == true {
+                                memberStatus = "Active"
+                            } else if isJoined == true {
+                                memberStatus = "Joined"
+                            } else {
+                                memberStatus = "Pending"
                             }
+                            self.databaseRef.child("Users").child(userUID).observeSingleEvent(of: .value, with: { (snapshot_user) in
+                                let userValue = snapshot_user.value as? NSDictionary
+                                let displayName = userValue?["mFullName"] as! String
+                                let photoUrl = userValue?["mPhotoUrl"] as! String
+                                print(displayName)
+                                print(photoUrl)
+                                print(memberStatus!)
+                                let chatMember = ChatMembers(memberImageUrl: photoUrl, memberDisplayName: displayName, memberStatus: memberStatus!,memberUID: userUID)
+                                self.members.append(chatMember)
+                                DispatchQueue.main.async {
+                                    self.collectionViewMembers.reloadData()
+                                }
+                            })
                         })
-                        
-                        
-                    })
+                    }
                 }
                 
             }
+        })
+    }
+    
+    func loadChatMembers1(){
+        databaseRef.child("Topics").child((topic?.topicID!)!).child("members").observe(.value, with: {(snapshot) in
+//            self.members.removeAll()
+            print("remove")
+            
+            for snap in snapshot.children.allObjects as! [DataSnapshot] {
+                print(snap.key)
+            }
+            
+//            let membersRef: DatabaseReference = self.databaseRef.child("Topics").child((self.topic?.topicID!)!).child("members")
+//            for snap in snapshot.children.allObjects as! [DataSnapshot]  {
+//                // print(snap.key)
+//                if snap.childrenCount == 3 {
+//                    print(snap.key)
+//                    let userUID: String = snap.key
+//                    
+//                    if userUID != "sample" {
+//                        membersRef.child(userUID).observeSingleEvent(of:.value, with: { (snapshots) in
+//                            // Get user value
+//                            let value = snapshots.value as? NSDictionary
+//                            let isActive = value?["isActive"] as? Bool
+//                            let isJoined = value?["isJoined"] as? Bool
+//                            var memberStatus: String?
+//                            if isActive == true {
+//                                memberStatus = "Active"
+//                            } else if isJoined == true {
+//                                memberStatus = "Joined"
+//                            } else {
+//                                memberStatus = "Pending"
+//                            }
+//                            self.databaseRef.child("Users").child(userUID).observeSingleEvent(of: .value, with: { (snapshot_user) in
+//                                let userValue = snapshot_user.value as? NSDictionary
+//                                let displayName = userValue?["mFullName"] as! String
+//                                let photoUrl = userValue?["mPhotoUrl"] as! String
+//                                print(displayName)
+//                                print(photoUrl)
+//                                print(memberStatus!)
+//                                let chatMember = ChatMembers(memberImageUrl: photoUrl, memberDisplayName: displayName, memberStatus: memberStatus!,memberUID: userUID)
+//                                self.members.append(chatMember)
+//                                DispatchQueue.main.async {
+//                                    self.collectionViewMembers.reloadData()
+//                                }
+//                            })
+//                        })
+//                    }
+//                }
+//                
+//            }
         })
     }
     
