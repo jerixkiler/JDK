@@ -16,6 +16,7 @@ class topicController: UIViewController, UICollectionViewDelegate, UICollectionV
     
     @IBOutlet weak var collectionView: UICollectionView!
     var databaseRef: DatabaseReference!
+    var topicRef: DatabaseReference = Database.database().reference().child("Topics")
     
     var topics = [Topic]()
     
@@ -39,17 +40,18 @@ class topicController: UIViewController, UICollectionViewDelegate, UICollectionV
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let topic = topics[indexPath.row]
         if userUID != topic.ownerUserID {
-            promptToWaitForOwnerResponse(topicID: topic.topicID!)
+            promptToWaitForOwnerResponse(topicID: topic.topicID!,topicSender: topic)
             let cell = collectionView.cellForItem(at: indexPath) as! customCell
             if cell.joinButton.titleLabel?.text == "Join" {
                 cell.joinButton.setTitle("Pending", for: .normal)
             }
         } else {
             print("Owner clicked!")
+            performSegue(withIdentifier: "goToChat", sender: topic)
         }
     }
     
-    func promptToWaitForOwnerResponse(topicID: String){
+    func promptToWaitForOwnerResponse(topicID: String , topicSender: Topic){
         
         databaseRef.child("Topics").child(topicID).observeSingleEvent(of: .value, with: {(snapshot) in
             if snapshot.hasChild("members") {
@@ -58,11 +60,12 @@ class topicController: UIViewController, UICollectionViewDelegate, UICollectionV
                     if value[self.uid] as! Bool == false {
                         let alertController = UIAlertController(title: "Waiting", message: "Response is being sent", preferredStyle: .alert)
                         let okButton = UIAlertAction(title: "OK", style: .default, handler: nil)
-                        self.databaseRef.child("Topics").child(topicID).child("members").updateChildValues([(Auth.auth().currentUser?.uid)!:false])
+//                        self.databaseRef.child("Topics").child(topicID).child("members").updateChildValues([(Auth.auth().currentUser?.uid)!:false])
                         alertController.addAction(okButton)
                         self.present(alertController, animated: true, completion: nil)
                     } else {
                         print("Accepted")
+                        self.performSegue(withIdentifier: "goToChat", sender: topicSender)
                     }
                 })
             } else {
@@ -125,13 +128,11 @@ class topicController: UIViewController, UICollectionViewDelegate, UICollectionV
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        
         let cellIdentifier = "topicCell"
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellIdentifier, for: indexPath) as? customCell else {
             fatalError("The dequeued cell is not an instance of HomeFeedCell.")
         }
         cell.backgroundImageView.layer.cornerRadius = cell.backgroundImageView.frame.size.width / 2
-        // Fetches the appropriate meal for the data source layout.
         let topic = topics[indexPath.row]
         DispatchQueue.main.async {
             cell.topicDescriptionLabel.text = topic.topicDescription
@@ -150,7 +151,6 @@ class topicController: UIViewController, UICollectionViewDelegate, UICollectionV
                 cell.joinButton.isHidden = false
             }
         }
-        // cell.ratingControl.rating = meal.rating!
         return cell
     }
     func loadHomeFeed(){
@@ -200,8 +200,19 @@ class topicController: UIViewController, UICollectionViewDelegate, UICollectionV
             print("Go To Add Post")
             let atvc = segue.destination as? AddTopicViewController
             atvc?.userUID = userUID
-            
+        } else if segue.identifier == "goToChat" {
+            print("Go To Chat")
+            if let topic = sender as? Topic {
+                //let nav = segue.destination as! UINavigationController
+                let chatVc = segue.destination as! ChatViewController
+                chatVc.senderDisplayName = "Sample"
+                chatVc.topic = topic
+                chatVc.topicRef = topicRef.child(topic.topicID!)
+            }
         }
+        
+        
+        
     }
     
     

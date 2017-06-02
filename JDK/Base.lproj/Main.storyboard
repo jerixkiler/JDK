@@ -484,7 +484,7 @@
                     </navigationItem>
                     <connections>
                         <outlet property="collectionView" destination="zL7-fa-Mzc" id="AR8-2K-raQ"/>
-                        <segue destination="Ks0-F0-7kR" kind="show" identifier="goToChat" id="XvU-dZ-tmh"/>
+                        <segue destination="z5a-Hv-nwI" kind="show" id="8Rp-9y-rlf"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="NkU-PO-QYb" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -646,24 +646,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iZa-bp-bVw" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1924" y="815"/>
-        </scene>
-        <!--Navigation Controller-->
-        <scene sceneID="vZH-zP-Pf2">
-            <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Ks0-F0-7kR" sceneMemberID="viewController">
-                    <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="PbL-vX-GWf">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <nil name="viewControllers"/>
-                    <connections>
-                        <segue destination="z5a-Hv-nwI" kind="relationship" relationship="rootViewController" id="aZz-SR-Evd"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Wzb-KK-NTr" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1533.5999999999999" y="-2132.3838080959522"/>
         </scene>
     </scenes>
     <resources>
