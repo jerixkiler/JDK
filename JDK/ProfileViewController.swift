@@ -25,6 +25,7 @@ class ProfileViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+
         databaseRef = Database.database().reference()
         
         
