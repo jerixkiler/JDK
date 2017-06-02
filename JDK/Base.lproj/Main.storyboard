@@ -361,6 +361,9 @@
                                             <rect key="frame" x="281" y="13" width="86" height="30"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <state key="normal" title="Not Active"/>
+                                            <connections>
+                                                <action selector="clickStatusButton:" destination="5fg-Fn-DGs" eventType="touchUpInside" id="2Td-5w-fD1"/>
+                                            </connections>
                                         </button>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3ok-TC-VYT">
                                             <rect key="frame" x="56" y="18" width="217" height="21"/>

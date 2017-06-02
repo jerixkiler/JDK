@@ -14,11 +14,13 @@ class ChatMembers {
     var memberImageUrl: String?
     var memberDisplayName: String?
     var memberStatus: String?
+    var memberUID: String?
     
-    init(memberImageUrl: String , memberDisplayName: String , memberStatus: String) {
+    init(memberImageUrl: String , memberDisplayName: String , memberStatus: String, memberUID: String) {
         self.memberImageUrl = memberImageUrl
         self.memberDisplayName = memberDisplayName
         self.memberStatus = memberStatus
+        self.memberUID = memberUID
     }
     
 }
