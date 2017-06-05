@@ -33,6 +33,48 @@ class ChatViewController:  JSQMessagesViewController{
         }
     }
     
+    private lazy var usersTypingQuery: DatabaseQuery =
+        self.databaseRef!.child("Topics").child(self.topic!.topicID!).child("typing_indicator").queryOrderedByValue().queryEqual(toValue: true)
+    
+    private lazy var userIsTypingRef: DatabaseReference = self.databaseRef!.child("Topics").child(self.topic!.topicID!).child(self.senderId).child("isTyping")
+    // 1
+    //var userIsTyping: DatabaseReference = Database.database().reference().child("Topics").child(topic.topicID).child("members").child(uid)
+    
+    
+    
+    private var localTyping = false // 2
+    var isTyping: Bool {
+        get {
+            return localTyping
+        }
+        set {
+            // 3
+            localTyping = newValue
+            userIsTypingRef.setValue(newValue)
+        }
+    }
+    
+    private func observeTyping() {
+        let typingIndicatorRef = databaseRef!.child("Topics").child((topic?.topicID)!).child("typing_indicator")
+        userIsTypingRef = typingIndicatorRef.child(senderId)
+        userIsTypingRef.setValue(isTyping)
+        
+        // 1
+        usersTypingQuery.observe(.value) { (data: DataSnapshot) in
+            // 2 You're the only one typing, don't show the indicator
+            if data.childrenCount == 1 && self.isTyping {
+                return
+            }
+            // 3 Are there others typing?
+            self.showTypingIndicator = data.childrenCount > 0
+            self.scrollToBottom(animated: true)
+        }
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        observeTyping()
+    }
     // Helper methods to use outgoing or incoming bubble
     private func setupOutgoingBubble() -> JSQMessagesBubbleImage {
         let bubbleImageFactory = JSQMessagesBubbleImageFactory()
@@ -42,11 +84,6 @@ class ChatViewController:  JSQMessagesViewController{
     private func setupIncomingBubble() -> JSQMessagesBubbleImage {
         let bubbleImageFactory = JSQMessagesBubbleImageFactory()
         return bubbleImageFactory!.incomingMessagesBubbleImage(with: UIColor.jsq_messageBubbleLightGray())
-    }
-    
-    
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
     }
     
     // Get the message
@@ -142,6 +179,8 @@ class ChatViewController:  JSQMessagesViewController{
         JSQSystemSoundPlayer.jsq_playMessageSentSound() // 4
         
         finishSendingMessage() // 5
+        
+        isTyping = false
     }
     
     
@@ -182,6 +221,12 @@ class ChatViewController:  JSQMessagesViewController{
         databaseRef = Database.database().reference()
         print(senderId)
         observeMessages()
+    }
+    
+    override func textViewDidChange(_ textView: UITextView) {
+        super.textViewDidChange(textView)
+        // If the text is not empty, the user is typing
+        isTyping = textView.text != ""
     }
 
     override func didReceiveMemoryWarning() {
